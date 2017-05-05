@@ -1,7 +1,7 @@
-Ansible Neo4j playbook
+Ansible Neo4j playbook for Centos/RHEL
 =====
 
-This role installs and configures Neo4j. It also handles Neo4j spatial.
+This role installs and configures Neo4j. Based on the [Ubuntu role by deimosfr](https://github.com/deimosfr/ansible-neo4j).
 
 Requirements
 ------------
@@ -17,13 +17,9 @@ The variables that can be passed to this role. You can find all options in
 ```
 # Select neo4j version
 neo4j_package: neo4j # community version
-#neo4j_package: neo4j-advanced
-#neo4j_package: neo4j-enterprise
 
 # Package version
 neo4j_package_version: stable
-#neo4j_package_version: oldstable
-#neo4j_package_version: testing
 
 # Force user id
 neo4j_uid:
@@ -33,7 +29,6 @@ neo4j_manage_service: True
 
 # Neo4j spatial plugin
 neo4j_install_spatial: false
-neo4j_spatial_version: '0.13-neo4j-2.1.2'
 neo4j_plugins_directory: '/usr/share/neo4j/plugins'
 
 # java prerequisite
@@ -106,5 +101,3 @@ Author Information
 ------------------
 
 Pierre Mavro / deimosfr
-
-
