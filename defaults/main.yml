@@ -16,11 +16,6 @@ neo4j_uid:
 # Manage service
 neo4j_manage_service: True
 
-# Neo4j spatial plugin
-neo4j_install_spatial: false
-neo4j_spatial_version: '0.13-neo4j-2.1.2'
-neo4j_plugins_directory: '/usr/share/neo4j/plugins'
-
 # java prerequisite
 neo4j_install_java: false
 neo4j_java_package_name: openjdk-7-jdk
