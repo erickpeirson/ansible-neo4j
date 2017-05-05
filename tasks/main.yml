@@ -2,6 +2,7 @@
 
 - include: install_neo4j.yml
   tags: [neo4j]
+  become: true
 
 - include: install_neo4j_spatial.yml
   when: neo4j_install_spatial

@@ -1,23 +1,28 @@
 ---
 
-- name: install neo4j dependencies
-  apt: name={{ item }} state=present update_cache=yes force=yes
-  with_items:
-    - python-urllib3
-    - libpython-stdlib
+- name: make sure yum is up to date
+  yum:
+    name: '*'
+    state: latest
+  become: yes
 
-- name: install Java
-  apt: name={{ neo4j_java_package_name }} state=present update_cache=yes force=yes
-  when: neo4j_install_java
+- name: add neo4j rpm key
+  rpm_key:
+    state: present
+    key: http://debian.neo4j.org/neotechnology.gpg.key
 
-- name: add Neo4j apt key
-  apt_key: url=http://debian.neo4j.org/neotechnology.gpg.key state=present
+- name: Add Neo4j yum repository
+  yum_repository:
+    name: neo4j
+    description: Neo4j Yum Repo
+    baseurl: http://yum.neo4j.org/stable
+    gpgcheck: yes
+    enabled: yes
 
-- name: set Neo4j repository
-  apt_repository: repo="deb http://debian.neo4j.org/repo {{ neo4j_package_version }}/" state=present update_cache=yes
-
-- name: install neo4j package
-  apt: name={{ neo4j_package }} state=present update_cache=yes force=yes
+- name: install neo4j
+  yum:
+    name: neo4j
+    state: present
 
 - name: set neo4j user uid
   user: name=neo4j uid={{ neo4j_uid }} state=present
@@ -50,5 +55,5 @@
   when: neo4j_update_limits
 
 - name: ensure Neo4j is enabled and started
-  service: name=neo4j-service enabled=yes state=started
+  service: name=neo4j enabled=yes state=started
   when: neo4j_manage_service
